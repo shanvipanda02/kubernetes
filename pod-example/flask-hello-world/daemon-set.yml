@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: print-on-node-daemonset
+spec:
+  selector:
+    matchLabels:
+      app: print-on-node
+  template:
+    metadata:
+      labels:
+        app: print-on-node
+    spec:
+      containers:
+      - name: busybox-printer
+        image: busybox:latest
+        command: ["sh", "-c", "hostname; echo 'Hello from Kubernetes DaemonSet!'"]

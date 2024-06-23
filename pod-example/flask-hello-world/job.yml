@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: print-message-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: busybox-printer
+        image: busybox:latest
+        command: ["sh", "-c", "for i in {1..5}; do echo 'Hello Kubernetes Job!'; sleep 1; done"]
+      restartPolicy: OnFailure  # Optional, retry failed pods up to container's default retry count
+  completions: 1             #

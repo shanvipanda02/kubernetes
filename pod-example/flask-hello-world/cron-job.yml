@@ -1,0 +1,15 @@
+apiVersion: v1  # CronJob API version (might differ based on your Kubernetes version)
+kind: CronJob
+metadata:
+  name: hourly-message-job
+spec:
+  schedule: "0 * * * *"  # Runs every hour (on the zeroth minute)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: busybox-message
+            image: busybox:latest
+            command: ["sh", "-c", "date; echo 'Hello from Kubernetes CronJob!'"]
+          restartPolicy: OnFailure  # Optional, retry failed pods up to container's default retry count

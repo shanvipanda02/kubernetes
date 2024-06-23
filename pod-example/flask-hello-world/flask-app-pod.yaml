@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flask-hello-world-pod
+spec:
+  containers:
+    - name: flask-app
+      image: shanvipanda02/kubernets:latest
+      ports:
+        - containerPort: 5000
+

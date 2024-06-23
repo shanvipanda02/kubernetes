@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: parallel-message-job
+spec:
+  parallelism: 3  # Run 3 pods in parallel
+  completions: 3  # Job completes when 3 pods finish successfully
+  template:
+    spec:
+      containers:
+      - name: busybox-printer
+        image: busybox:latest
+        command: ["sh", "-c", "for i in {1..5}; do echo 'Hello Kubernetes Job!'; sleep 1; done"]
+      restartPolicy: OnFailure  # Optional, retry failed pods up to container's default retry count

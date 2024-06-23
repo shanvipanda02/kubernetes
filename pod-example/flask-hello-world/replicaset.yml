@@ -1,0 +1,21 @@
+# deployment.yaml (updated)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx-deployment
+spec:
+  replicas: 3  # Keep replicas unchanged
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest  # Update image to latest version
+        ports:
+        - containerPort: 80
+
